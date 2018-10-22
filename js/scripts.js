@@ -30,4 +30,30 @@ $(document).ready(function() {
     });
     $("#groceryForm").hide();
   });
+
+  $("#words-form").submit(function(event){
+    event.preventDefault();
+    var wordList = $("#words").val();
+    var wordArray = wordList.split(" ");
+    // console.log(wordArray);
+
+    var words = [];
+    var counts = [];
+    wordArray.forEach(function(word) {
+      var index = words.indexOf(word);
+      if(index === -1) {
+        words.push(word);
+        counts.push(1);
+      } else {
+        counts[index] += 1
+      }
+      // console.log(word, index, words, counts);
+    });
+    $("#countList").empty();
+    words.forEach(function(word, index){
+      var count = counts[index];
+      console.log(word, index, count);
+      $("#countList").append("<li>" + word + " " + count +  "</li>");
+    });
+  });
 });
